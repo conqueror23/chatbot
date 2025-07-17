@@ -7,6 +7,7 @@ module.exports = {
   mode: "development",
   devServer: {
     port: 3101,
+    allowedHosts: "all",
   },
   output: {
     publicPath: "auto",
@@ -25,9 +26,14 @@ module.exports = {
       name: "remoteApp",
       filename: "socket.js",
       exposes: {
-        "./socket": "./shared/socket.ts", // exposed module
+        "./socket": "./src/shared/socket.ts", // exposed module
       },
-      shared: { react: { singleton: true }, "react-dom": { singleton: true } },
+      shared: { 
+        react: { singleton: true, eager: false }, 
+        "react-dom": { singleton: true, eager: false },
+        "react/jsx-runtime": { singleton: true, eager: false },
+        "socket.io-client": { singleton: true, eager: false }
+      },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
   ],

@@ -34,7 +34,12 @@ module.exports = {
       remotes: {
         remoteApp: "remoteApp@http://localhost:3101/socket.js",
       },
-      shared: { react: { singleton: true }, "react-dom": { singleton: true } },
+      shared: { 
+        react: { singleton: true, eager: false }, 
+        "react-dom": { singleton: true, eager: false },
+        "react/jsx-runtime": { singleton: true, eager: false },
+        "socket.io-client": { singleton: true, eager: false }
+      },
     }),
   ],
   devServer: {
@@ -42,6 +47,7 @@ module.exports = {
     port: 3100,
     hot: true,
     open: true,
+    allowedHosts: "all",
   },
 };
 
